@@ -10,6 +10,7 @@ namespace EventsAndDelegates
             {
                 Title = "Around the World in ..."
             };
+            
             VideoEncoder encoder = new VideoEncoder();
             var mailservice = new MailService();
             var messageService = new MessageService();
@@ -18,7 +19,9 @@ namespace EventsAndDelegates
             encoder.VideoEncoded += messageService.OnVideoEncoded;
             encoder.VideoEncoding += messageService.OnVideoEncoding;
             encoder.VideoEncoded += rssService.OnVideoEncoded;
+            encoder.VideoEncrypted += mailservice.OnVideoEncrypted;
             encoder.Encode(video);
+            encoder.Encrypt(video);
         }
     }
 }

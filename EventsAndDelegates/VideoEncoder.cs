@@ -5,8 +5,11 @@ namespace EventsAndDelegates
 {
     public class VideoEncoder
     {
-        //public delegate void VideoEncodedEventHandler(object source, VideoEventArgs args);
-        
+        //Longer Way
+        public delegate void VideoEncryptedEventHandler(object source, VideoEventArgs args);
+        public event VideoEncryptedEventHandler VideoEncrypted;
+
+        //Short Way
         public event EventHandler<VideoEventArgs> VideoEncoded;
         public event EventHandler<VideoEventArgs> VideoEncoding; 
         
@@ -16,6 +19,21 @@ namespace EventsAndDelegates
             OnVideoEncoding(video);
             Thread.Sleep(3000);
             OnVideoEncoded(video);
+        }
+
+        public void Encrypt(Video video)
+        {
+            Console.WriteLine("Encrypting Video...");
+            Thread.Sleep(3000);
+            OnVideoEncrypted(video);
+        }
+
+        protected virtual void OnVideoEncrypted(Video video)
+        {
+            if (VideoEncrypted != null)
+            {
+                VideoEncrypted(this, new VideoEventArgs(){ Video = video });
+            }
         }
 
         protected virtual void OnVideoEncoded(Video video)

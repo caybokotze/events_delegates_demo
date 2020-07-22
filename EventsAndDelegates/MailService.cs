@@ -13,5 +13,10 @@ namespace EventsAndDelegates
         {
             Console.WriteLine("The video has begun encoding process. hang tight. ;)");
         }
+
+        public void OnVideoEncrypted(object source, VideoEventArgs e)
+        {
+            Console.WriteLine("The email was sent that the video was encrypted.");
+        }
     }
 }
